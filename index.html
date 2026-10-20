@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Persönliche Webseite von Jonas – Studium, Lebenslauf und Orte.">
+  <title>About Me | Jonas</title>
+
+  <!-- Leaflet stellt die interaktiven Karten bereit. Internetverbindung erforderlich. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root {
+      --green: #478b73;
+      --green-dark: #28684f;
+      --text: #14181b;
+      --muted: #52616b;
+      --border: #e0e4e4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0 18px 24px;
+      background: #0d1219;
+      color: var(--text);
+      font: 16px/1.58 Arial, Helvetica, sans-serif;
+    }
+    .page {
+      max-width: 1000px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    }
+    .site-header {
+      min-height: 94px;
+      background: var(--green);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .site-header h1 { margin: 0; font-size: 29px; line-height: 1.2; }
+    main { padding: 28px 15px 14px; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 34px;
+      align-items: start;
+      min-height: 220px;
+    }
+    .intro h2 { margin: 1px 0 17px; font-size: 20px; }
+    p { margin: 0 0 16px; }
+    a { color: #145aa8; }
+    a:hover { color: var(--green-dark); }
+    .profile-photo { margin: 0; }
+    .profile-photo img {
+      width: 100%;
+      height: 183px;
+      display: block;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .profile-photo figcaption { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    section { margin-top: 34px; }
+    section h2 { font-size: 17px; line-height: 1.4; margin: 0 0 16px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 555px; }
+    th, td { border: 1px solid var(--border); padding: 8px 9px; text-align: left; font-size: 14px; }
+    th { background: #f2f2f2; font-weight: 700; }
+    tbody tr:hover { background: #f4faf7; }
+    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .card {
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+      border-radius: 4px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .map { height: 155px; width: 100%; background: #e9eeef; }
+    .card-body { padding: 10px 11px 14px; }
+    .card h3 { font-size: 15px; margin: 0 0 3px; }
+    .card p { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+    .card a { font-size: 13px; font-weight: 700; }
+    footer { padding: 16px; color: var(--muted); text-align: center; font-size: 12px; }
+    .leaflet-container { font-family: Arial, Helvetica, sans-serif; }
+    .leaflet-control-attribution { font-size: 8px !important; }
+    @media (max-width: 720px) {
+      body { padding: 0; }
+      main { padding: 24px 18px; }
+      .intro { grid-template-columns: 1fr; gap: 14px; }
+      .profile-photo { max-width: 360px; }
+      .gallery { grid-template-columns: 1fr; }
+      .map { height: 210px; }
+      .site-header h1 { font-size: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1>About Me</h1>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="intro-title" style="margin-top:0">
+        <div>
+          <h2 id="intro-title">Hi, ich bin Jonas!</h2>
+          <p>
+            Willkommen auf meiner persönlichen Webseite! Ich interessiere mich für
+            Geoinformatik, Vermessung und digitale Karten. Hier stelle ich mich und
+            einige Orte vor, die für mich eine Rolle spielen.
+          </p>
+          <p>
+            Ich studiere Geoinformatik und Vermessung an der Hochschule Mainz.
+            Mehr über meine Projekte gibt es auf
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>.
+            <!-- TIPP: Ersetze https://github.com/ durch den Link zu deinem Profil. -->
+          </p>
+        </div>
+        <figure class="profile-photo">
+          <img src="assets/me.jpg" alt="Platzhalter für mein persönliches Porträt" width="720" height="520">
+          <figcaption>Hier kannst du dein eigenes Foto einsetzen.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="cv-title">
+        <h2 id="cv-title">My CV</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th scope="col">Jahr</th><th scope="col">Station</th><th scope="col">Einrichtung</th><th scope="col">Ort</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Seit 2024</td><td>Duales Studium</td><td>Hochschule Mainz</td><td>Mainz</td></tr>
+              <tr><td>Seit 2024</td><td>Praxis im Bereich Vermessung</td><td>DLR Rheinpfalz</td><td>Neustadt an der Weinstraße</td></tr>
+              <tr><td>2022–2023</td><td>Freiwilliges Soziales Jahr</td><td>Deutsche Schule Sevilla</td><td>Sevilla</td></tr>
+              <tr><td>Vor 2024</td><td>Studium</td><td>Hochschule in Mannheim</td><td>Mannheim</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="work-title">
+        <h2 id="work-title">My Work – Drei Orte</h2>
+        <div class="gallery">
+          <article class="card">
+            <div class="map" id="map-mainz" role="region" aria-label="Interaktive Karte von Mainz"></div>
+            <div class="card-body">
+              <h3>Mainz</h3>
+              <p>Mein Studienort in Rheinland-Pfalz.</p>
+              <a href="https://www.openstreetmap.org/?mlat=50.001&mlon=8.272#map=12/50.001/8.272" target="_blank" rel="noopener noreferrer" aria-label="Mainz auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="map" id="map-sevilla" role="region" aria-label="Interaktive Karte von Sevilla"></div>
+            <div class="card-body">
+              <h3>Sevilla</h3>
+              <p>Hier habe ich mein FSJ gemacht.</p>
+              <a href="https://www.openstreetmap.org/?mlat=37.389&mlon=-5.984#map=12/37.389/-5.984" target="_blank" rel="noopener noreferrer" aria-label="Sevilla auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="map" id="map-bodensee" role="region" aria-label="Interaktive Karte vom Bodensee"></div>
+            <div class="card-body">
+              <h3>Bodensee</h3>
+              <p>Meine Heimatregion im Süden Deutschlands.</p>
+              <a href="https://www.openstreetmap.org/?mlat=47.66&mlon=9.18#map=10/47.66/9.18" target="_blank" rel="noopener noreferrer" aria-label="Bodensee auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>Persönliche Beispielseite · HTML, CSS und Leaflet · © 2026</footer>
+  </div>
+
+  <!-- Kleine JavaScript-Ergänzung: Drei echte zoombare OpenStreetMap-Karten. -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    function createMap(elementId, latitude, longitude, label, zoom) {
+      const map = L.map(elementId, { scrollWheelZoom: false }).setView([latitude, longitude], zoom);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende'
+      }).addTo(map);
+      L.marker([latitude, longitude]).addTo(map).bindPopup(label);
+    }
+    createMap('map-mainz', 50.001, 8.272, 'Mainz', 7);
+    createMap('map-sevilla', 37.389, -5.984, 'Sevilla', 7);
+    createMap('map-bodensee', 47.66, 9.18, 'Bodensee', 8);
+  </script>
+</body>
+</html>
