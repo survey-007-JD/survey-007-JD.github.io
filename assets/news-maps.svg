@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title">
+  <title id="title">Karte mit drei Ortsmarkierungen</title>
+  <rect width="1200" height="675" fill="#dce8e3"/>
+  <path d="M0 75 430 0l355 135 415-90v630H0Z" fill="#edf3ea"/>
+  <path d="M0 430 325 300l350 125 525-140v390H0Z" fill="#c5dac8"/>
+  <path d="M-45 555C195 430 270 480 495 290S855 245 1240 90" fill="none" stroke="#9bcbdc" stroke-width="65"/>
+  <path d="M-45 555C195 430 270 480 495 290S855 245 1240 90" fill="none" stroke="#d5eef5" stroke-width="36"/>
+  <path d="M-20 190 350 125l360 230 510-100M185 705 395 365l430-280M695 700l120-350 420-20" fill="none" stroke="#fff" stroke-width="22" opacity=".9"/>
+  <g fill="#0004f9" stroke="#fff" stroke-width="12">
+    <path d="M350 190c-55 0-100 45-100 100 0 70 100 170 100 170s100-100 100-170c0-55-45-100-100-100Z"/>
+    <path d="M755 365c-55 0-100 45-100 100 0 70 100 170 100 170s100-100 100-170c0-55-45-100-100-100Z"/>
+    <path d="M940 65c-55 0-100 45-100 100 0 70 100 170 100 170s100-100 100-170c0-55-45-100-100-100Z"/>
+  </g>
+  <g fill="#d5cf10">
+    <circle cx="350" cy="290" r="29"/>
+    <circle cx="755" cy="465" r="29"/>
+    <circle cx="940" cy="165" r="29"/>
+  </g>
+</svg>

@@ -9,39 +9,141 @@
   <!-- Leaflet stellt die interaktiven Karten bereit. Internetverbindung erforderlich. -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
+    /* Farbvariablen für den hellen Modus */
     :root {
-      --green: #478b73;
-      --green-dark: #28684f;
-      --text: #14181b;
-      --muted: #52616b;
-      --border: #e0e4e4;
+      --blue: #0004f9;
+      --yellow: #d5cf10;
+      --background: #eef1f8;
+      --surface: #ffffff;
+      --surface-soft: #f7f8fc;
+      --text: #171c2c;
+      --muted: #4b566c;
+      --border: #dce1ed;
+      --link: #2528ad;
+      --link-hover: #6f6900;
+      --row-hover: #eef0ff;
+      --shadow: 0 18px 45px rgba(28, 39, 80, .12);
+      --header-background: var(--blue);
+      color-scheme: light;
+    }
+    /* Regeln mit var(...) übernehmen beim Theme-Wechsel automatisch diese Farben. */
+    :root[data-theme="dark"] {
+      --background: #101521;
+      --surface: #1c2433;
+      --surface-soft: #273143;
+      --text: #f5f7ff;
+      --muted: #bcc7d9;
+      --border: #3d4960;
+      --link: #e1d945;
+      --link-hover: var(--yellow);
+      --row-hover: #303b55;
+      --shadow: 0 18px 45px rgba(0, 0, 0, .3);
+      --header-background: #171bb3;
+      color-scheme: dark;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0 18px 24px;
-      background: #0d1219;
+      padding: 24px 18px;
+      background: var(--background);
       color: var(--text);
       font: 16px/1.58 Arial, Helvetica, sans-serif;
+      transition: background-color .25s ease, color .25s ease;
     }
     .page {
-      max-width: 1000px;
-      min-height: 100vh;
+      max-width: 1080px;
+      min-height: calc(100vh - 48px);
       margin: 0 auto;
-      background: white;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      background: var(--surface);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
     .site-header {
-      min-height: 94px;
-      background: var(--green);
+      background: var(--header-background);
       color: white;
+      padding: 30px clamp(20px, 4vw, 44px);
+    }
+    .header-inner {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 18px;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    .site-header h1 { margin: 0; font-size: 29px; line-height: 1.2; }
-    main { padding: 28px 15px 14px; }
+    .site-header h1 { margin: 0; font-size: clamp(28px, 4vw, 38px); line-height: 1.2; }
+    .site-header p { margin: 6px 0 0; color: rgba(255, 255, 255, .85); }
+    .theme-toggle {
+      border: 1px solid rgba(255, 255, 255, .55);
+      border-radius: 999px;
+      padding: 10px 17px;
+      background: rgba(255, 255, 255, .13);
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color .2s ease, transform .2s ease;
+    }
+    .theme-toggle:hover { background: rgba(255, 255, 255, .25); transform: translateY(-2px); }
+    .theme-toggle:focus-visible, .tab:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+    }
+    main { padding: 28px clamp(18px, 3vw, 36px) 38px; }
+    /* Tabs und Panels bilden die umschaltbaren Inhaltsbereiche. */
+    .tab-list {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .tab {
+      position: relative;
+      flex: 1 0 auto;
+      border: 0;
+      border-radius: 11px;
+      padding: 12px 18px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color .2s ease, background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .tab:hover { color: var(--text); transform: translateY(-2px); }
+    .tab[aria-selected="true"] {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 4, 249, .2);
+    }
+    .tab[aria-selected="true"]::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 3px;
+      border-radius: 3px;
+      left: 50%;
+      bottom: 5px;
+      transform: translateX(-50%);
+      background: var(--yellow);
+    }
+    .tab-panel {
+      margin: 0;
+      padding: clamp(18px, 3vw, 32px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+      animation: panel-enter .28s ease-out;
+    }
+    .tab-panel[hidden] { display: none; }
+    @keyframes panel-enter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .intro {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 280px;
@@ -51,98 +153,170 @@
     }
     .intro h2 { margin: 1px 0 17px; font-size: 20px; }
     p { margin: 0 0 16px; }
-    a { color: #145aa8; }
-    a:hover { color: var(--green-dark); }
+    a { color: var(--link); }
+    a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
     .profile-photo { margin: 0; }
     .profile-photo img {
       width: 100%;
-      height: 183px;
+      height: auto;
       display: block;
-      object-fit: cover;
+      border-radius: 14px;
       border: 1px solid var(--border);
     }
     .profile-photo figcaption { color: var(--muted); font-size: 12px; margin-top: 6px; }
-    section { margin-top: 34px; }
     section h2 { font-size: 17px; line-height: 1.4; margin: 0 0 16px; }
+    .cv-section { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--border); }
+    .section-lead { color: var(--muted); margin-top: -6px; }
     .table-scroll { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 555px; }
     th, td { border: 1px solid var(--border); padding: 8px 9px; text-align: left; font-size: 14px; }
-    th { background: #f2f2f2; font-weight: 700; }
-    tbody tr:hover { background: #f4faf7; }
-    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    th { background: var(--surface-soft); font-weight: 700; }
+    tbody tr:hover { background: var(--row-hover); }
+    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .news-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .card {
       border: 1px solid var(--border);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
-      border-radius: 4px;
+      border-radius: 16px;
       overflow: hidden;
-      background: #fff;
+      background: var(--surface-soft);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .map { height: 155px; width: 100%; background: #e9eeef; }
-    .card-body { padding: 10px 11px 14px; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .map { height: 180px; width: 100%; background: var(--surface-soft); }
+    .card-body { padding: 14px 16px 18px; }
     .card h3 { font-size: 15px; margin: 0 0 3px; }
     .card p { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
     .card a { font-size: 13px; font-weight: 700; }
-    footer { padding: 16px; color: var(--muted); text-align: center; font-size: 12px; }
+    .news-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .news-card time { display: block; margin-bottom: 7px; color: var(--muted); font-size: 12px; }
+    .news-card h3 { font-size: 17px; margin-bottom: 8px; }
+    .news-card p { font-size: 14px; line-height: 1.55; }
+    .news-status { grid-column: 1 / -1; color: var(--muted); }
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px clamp(18px, 3vw, 36px);
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .contact-block { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+    .contact-links { display: flex; gap: 8px; }
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--link);
+      transition: transform .2s ease, background-color .2s ease;
+    }
+    .contact-links a:hover {
+      transform: translateY(-3px);
+      background: var(--row-hover);
+    }
+    .contact-links a:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+    }
+    .contact-links svg { width: 22px; height: 22px; }
     .leaflet-container { font-family: Arial, Helvetica, sans-serif; }
     .leaflet-control-attribution { font-size: 8px !important; }
+    /* Auf schmalen Bildschirmen stehen Foto und Karten untereinander. */
     @media (max-width: 720px) {
       body { padding: 0; }
+      .page { min-height: 100vh; border-radius: 0; }
       main { padding: 24px 18px; }
       .intro { grid-template-columns: 1fr; gap: 14px; }
       .profile-photo { max-width: 360px; }
       .gallery { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
       .map { height: 210px; }
-      .site-header h1 { font-size: 25px; }
+    }
+    @media (max-width: 430px) {
+      .site-header { padding: 24px 18px; }
+      .tab { padding: 11px 14px; }
+      footer { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header class="site-header">
-      <h1>About Me</h1>
+      <div class="header-inner">
+        <div>
+          <h1>Über mich</h1>
+          <p>Geoinformatik · Vermessung · digitale Karten</p>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">☾ Nachtmodus</button>
+      </div>
     </header>
 
     <main>
-      <section class="intro" aria-labelledby="intro-title" style="margin-top:0">
-        <div>
-          <h2 id="intro-title">Hi, ich bin Jonas!</h2>
-          <p>
-            Willkommen auf meiner persönlichen Webseite! Ich interessiere mich für
-            Geoinformatik, Vermessung und digitale Karten. Hier stelle ich mich und
-            einige Orte vor, die für mich eine Rolle spielen.
-          </p>
-          <p>
-            Ich studiere Geoinformatik und Vermessung an der Hochschule Mainz.
-            Mehr über meine Projekte gibt es auf
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>.
-            <!-- TIPP: Ersetze https://github.com/ durch den Link zu deinem Profil. -->
-          </p>
+      <div class="tab-list" role="tablist" aria-label="Bereiche der Webseite">
+        <button class="tab" id="tab-about" type="button" role="tab" aria-controls="panel-about" aria-selected="true" tabindex="0">About</button>
+        <button class="tab" id="tab-news" type="button" role="tab" aria-controls="panel-news" aria-selected="false" tabindex="-1">News</button>
+        <button class="tab" id="tab-projects" type="button" role="tab" aria-controls="panel-projects" aria-selected="false" tabindex="-1">Projects</button>
+      </div>
+
+      <section class="tab-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0">
+        <div class="intro">
+          <div>
+            <h2 id="intro-title">Hi, ich bin Jonas!</h2>
+            <p>
+              Willkommen auf meiner persönlichen Webseite! Ich interessiere mich für
+              Geoinformatik, Vermessung und digitale Karten. Hier stelle ich mich und
+              einige Orte vor, die für mich eine Rolle spielen.
+            </p>
+            <p>
+              Ich studiere Geoinformatik und Vermessung an der Hochschule Mainz.
+              Mehr über meine Projekte gibt es auf
+              <a href="https://github.com/survey-007-JD" target="_blank" rel="noopener noreferrer">GitHub</a>.
+            </p>
+          </div>
+          <figure class="profile-photo">
+            <img src="assets/me.jpg" alt="Platzhalter für mein persönliches Porträt" width="1440" height="1040">
+          </figure>
         </div>
-        <figure class="profile-photo">
-          <img src="assets/me.jpg" alt="Platzhalter für mein persönliches Porträt" width="720" height="520">
-          <figcaption>Hier kannst du dein eigenes Foto einsetzen.</figcaption>
-        </figure>
+
+        <section class="cv-section" aria-labelledby="cv-title">
+          <h2 id="cv-title">My CV</h2>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th scope="col">Jahr</th><th scope="col">Station</th><th scope="col">Einrichtung</th><th scope="col">Ort</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Seit 2024</td><td>Duales Studium</td><td>Hochschule Mainz</td><td>Mainz</td></tr>
+                <tr><td>Seit 2024</td><td>Praxis im Bereich Vermessung</td><td>DLR Rheinpfalz</td><td>Neustadt an der Weinstraße</td></tr>
+                <tr><td>2022–2023</td><td>Freiwilliges Soziales Jahr</td><td>Deutsche Schule Sevilla</td><td>Sevilla</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </section>
 
-      <section aria-labelledby="cv-title">
-        <h2 id="cv-title">My CV</h2>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr><th scope="col">Jahr</th><th scope="col">Station</th><th scope="col">Einrichtung</th><th scope="col">Ort</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Seit 2024</td><td>Duales Studium</td><td>Hochschule Mainz</td><td>Mainz</td></tr>
-              <tr><td>Seit 2024</td><td>Praxis im Bereich Vermessung</td><td>DLR Rheinpfalz</td><td>Neustadt an der Weinstraße</td></tr>
-              <tr><td>2022–2023</td><td>Freiwilliges Soziales Jahr</td><td>Deutsche Schule Sevilla</td><td>Sevilla</td></tr>
-              <tr><td>Vor 2024</td><td>Studium</td><td>Hochschule in Mannheim</td><td>Mannheim</td></tr>
-            </tbody>
-          </table>
+      <section class="tab-panel" id="panel-news" role="tabpanel" aria-labelledby="tab-news" tabindex="0" hidden>
+        <h2>Neuigkeiten</h2>
+        <p class="section-lead">Aktuelles zu meiner Webseite und meinen Karten.</p>
+        <div class="news-grid" id="news-list" aria-live="polite">
+          <p class="news-status">Neuigkeiten werden geladen …</p>
         </div>
       </section>
 
-      <section aria-labelledby="work-title">
-        <h2 id="work-title">My Work – Drei Orte</h2>
+      <section class="tab-panel" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" tabindex="0" hidden>
+        <h2 id="work-title">Meine Projekte – Drei Web-Karten</h2>
         <div class="gallery">
           <article class="card">
             <div class="map" id="map-mainz" role="region" aria-label="Interaktive Karte von Mainz"></div>
@@ -171,12 +345,147 @@
         </div>
       </section>
     </main>
-    <footer>Persönliche Beispielseite · HTML, CSS und Leaflet · © 2026</footer>
+    <footer>
+      <span>Jonas D. GuV © 2026.</span>
+      <div class="contact-block" aria-label="Kontakt und externe Links">
+        <span>Kontakt &amp; Links</span>
+        <div class="contact-links">
+          <a href="https://github.com/survey-007-JD" target="_blank" rel="noopener noreferrer" aria-label="GitHub-Profil in neuem Tab öffnen" title="GitHub-Profil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 19c-4 1-5-2-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.4 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7A3.4 3.4 0 0 0 9 18.1V22"/>
+            </svg>
+          </a>
+          <a href="https://www.openstreetmap.org/?mlat=50.001&amp;mlon=8.272#map=12/50.001/8.272" target="_blank" rel="noopener noreferrer" aria-label="OpenStreetMap-Karte von Mainz in neuem Tab öffnen" title="OpenStreetMap-Karte">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Zm6-3v15m6-12v15"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- Kleine JavaScript-Ergänzung: Drei echte zoombare OpenStreetMap-Karten. -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    let savedTheme = 'light';
+    try {
+      savedTheme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+    } catch {
+      // Die Seite funktioniert auch, wenn der Browser Speicherzugriff blockiert.
+    }
+
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+      themeToggle.textContent = theme === 'dark' ? '☀ Tagmodus' : '☾ Nachtmodus';
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Tagmodus einschalten' : 'Nachtmodus einschalten');
+    }
+
+    setTheme(savedTheme);
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+      try {
+        localStorage.setItem('theme', nextTheme);
+      } catch {
+        // Ohne Speicherzugriff bleibt der Wechsel für diesen Seitenaufruf aktiv.
+      }
+    });
+
+    function activateTab(selectedTab, moveFocus = false) {
+      tabs.forEach(tab => {
+        const active = tab === selectedTab;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      panels.forEach(panel => {
+        panel.hidden = panel.id !== selectedTab.getAttribute('aria-controls');
+      });
+      if (moveFocus) selectedTab.focus();
+      if (selectedTab.id === 'tab-news') loadNews();
+      if (selectedTab.id === 'tab-projects') requestAnimationFrame(showMaps);
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', event => {
+        let nextIndex;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activateTab(tabs[nextIndex], true);
+      });
+    });
+
+    const newsList = document.getElementById('news-list');
+    let newsLoaded = false;
+    let newsLoading = false;
+
+    function renderNews(items) {
+      newsList.replaceChildren();
+      const entries = items.filter(item =>
+        item && typeof item.title === 'string' && typeof item.date === 'string' &&
+        typeof item.summary === 'string' && typeof item.image === 'string'
+      );
+      entries.sort((a, b) => b.date.localeCompare(a.date));
+      if (entries.length === 0) {
+        newsList.textContent = 'Noch keine Neuigkeiten vorhanden.';
+        return;
+      }
+
+      entries.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'card news-card';
+        const image = document.createElement('img');
+        image.src = item.image;
+        image.alt = item.imageAlt || 'Illustration zur Meldung: ' + item.title;
+        image.loading = 'lazy';
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        const date = document.createElement('time');
+        date.dateTime = item.date;
+        const parsedDate = new Date(item.date + 'T12:00:00');
+        date.textContent = Number.isNaN(parsedDate.getTime())
+          ? item.date
+          : new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(parsedDate);
+        const title = document.createElement('h3');
+        title.textContent = item.title;
+        const summary = document.createElement('p');
+        summary.textContent = item.summary;
+        body.append(date, title, summary);
+        card.append(image, body);
+        newsList.append(card);
+      });
+    }
+
+    async function loadNews() {
+      if (newsLoaded || newsLoading) return;
+      newsLoading = true;
+      try {
+        const response = await fetch('assets/news.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const items = await response.json();
+        if (!Array.isArray(items)) throw new Error('News-Datei enthält keine Liste');
+        renderNews(items);
+        newsLoaded = true;
+      } catch (error) {
+        console.error('Neuigkeiten konnten nicht geladen werden:', error);
+        newsList.textContent = location.protocol === 'file:'
+          ? 'Neuigkeiten laden nur über einen Webserver. Starte die Seite mit „Go Live“.'
+          : 'Neuigkeiten konnten nicht geladen werden. Bitte lade die Seite erneut.';
+      } finally {
+        newsLoading = false;
+      }
+    }
+
+    let maps = [];
     function createMap(elementId, latitude, longitude, label, zoom) {
       const map = L.map(elementId, { scrollWheelZoom: false }).setView([latitude, longitude], zoom);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -184,10 +493,20 @@
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende'
       }).addTo(map);
       L.marker([latitude, longitude]).addTo(map).bindPopup(label);
+      return map;
     }
-    createMap('map-mainz', 50.001, 8.272, 'Mainz', 7);
-    createMap('map-sevilla', 37.389, -5.984, 'Sevilla', 7);
-    createMap('map-bodensee', 47.66, 9.18, 'Bodensee', 8);
+
+    function showMaps() {
+      if (!window.L) return;
+      if (maps.length === 0) {
+        maps = [
+          createMap('map-mainz', 50.001, 8.272, 'Mainz', 7),
+          createMap('map-sevilla', 37.389, -5.984, 'Sevilla', 7),
+          createMap('map-bodensee', 47.66, 9.18, 'Bodensee', 8)
+        ];
+      }
+      maps.forEach(map => map.invalidateSize());
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2026-10-20",
+    "title": "Neue Gestaltung für meine Webseite",
+    "summary": "Die Webseite hat jetzt einen Hell-/Nachtmodus und drei übersichtliche Bereiche: About, News und Projects.",
+    "image": "assets/news-design.svg",
+    "imageAlt": "Illustration einer Webseite mit hellem und dunklem Bereich"
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Meine interaktiven Web-Karten",
+    "summary": "Im Bereich Projects zeige ich Karten von Mainz, Sevilla und dem Bodensee, die sich zoomen und erkunden lassen.",
+    "image": "assets/news-maps.svg",
+    "imageAlt": "Illustration einer Karte mit drei Ortsmarkierungen"
+  }
+]
