@@ -26,4 +26,5 @@ Der Tab **„Übung 3“** in [index.html](./index.html) zeigt die Folium-Karten
 - Die persönliche Punkte-Karte ist [maps/map_2_punkte.html](./maps/map_2_punkte.html) und zeigt Mainz, Pfullendorf und Ramsen (Pfalz).
 - Die Reiseroute führt über Mainz, Berlin, Den Haag und Paris.
 - Die Länderkarte hebt Deutschland, Schweiz, Österreich, Luxemburg, Niederlande, Belgien, Frankreich, Spanien, Portugal und das Vereinigte Königreich hervor.
-- Für die erweiterte Visualisierung erstelle eine Karte in [Kepler.gl](https://kepler.gl/), exportiere sie als HTML und speichere sie als `assets/kepler_map.html`. Danach kann sie direkt im Übung-3-Tab eingebunden werden.
+- Die erweiterte Visualisierung ist unter [assets/kepler_map.html](./assets/kepler_map.html) eingebunden. Sie kombiniert persönliche Orte, Reiseziele und die Reiseroute; alle Ebenen können über das Kartenmenü ein- und ausgeblendet werden.
+- Die Folium-Karten verwenden CARTO als Hintergrundkarte. Damit werden sie nicht mehr durch die Zugriffsbeschränkung des öffentlichen OpenStreetMap-Kachelservers blockiert; die Kartendaten werden weiterhin korrekt attribuiert.

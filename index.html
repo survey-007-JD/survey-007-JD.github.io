@@ -202,6 +202,7 @@
     .exercise-card h4 { margin: 0 0 4px; font-size: 16px; }
     .exercise-card p { margin: 0; color: var(--muted); font-size: 14px; }
     .map-frame { display: block; width: 100%; height: 380px; border: 0; border-top: 1px solid var(--border); background: var(--surface); }
+    .map-frame--advanced { height: min(70vh, 620px); min-height: 460px; border: 1px solid var(--border); border-radius: 16px; }
     .frame-link { display: block; padding: 10px 16px 14px; font-size: 13px; font-weight: 700; }
     .cesium-shell { overflow: hidden; border: 1px solid var(--border); border-radius: 16px; background: #dce7ef; }
     #cesiumContainer { width: 100%; height: min(68vh, 600px); min-height: 420px; }
@@ -256,6 +257,7 @@
       .exercise-grid { grid-template-columns: 1fr; }
       .exercise-card--wide { grid-column: auto; }
       .map-frame { height: 390px; }
+      .map-frame--advanced { height: 520px; }
       #cesiumContainer { min-height: 390px; }
     }
     @media (max-width: 430px) {
@@ -392,7 +394,10 @@
 
         <section class="exercise-section" aria-labelledby="advanced-title">
           <h3 id="advanced-title">Erweiterte Visualisierung</h3>
-          <p class="exercise-note">Für den letzten Teil kannst du eine Karte in <a href="https://kepler.gl/" target="_blank" rel="noopener noreferrer">Kepler.gl</a> erstellen, als HTML exportieren und als <code>assets/kepler_map.html</code> speichern. Danach binde ich sie hier ein.</p>
+          <p class="section-lead">Interaktive Übersicht der besuchten Orte und der Reiseroute. Die Ebenen und die Legende lassen sich direkt auf der Karte ein- und ausblenden.</p>
+          <iframe class="map-frame map-frame--advanced" src="assets/kepler_map.html" title="Erweiterte interaktive Visualisierung: Orte und Reiseroute" loading="lazy"></iframe>
+          <a class="frame-link" href="assets/kepler_map.html" target="_blank" rel="noopener noreferrer">Erweiterte Visualisierung in neuem Tab öffnen ↗</a>
+          <p class="exercise-note">Die Visualisierung liegt als eigenständige HTML-Datei unter <code>assets/kepler_map.html</code> im Repository und kann daher auch außerhalb der Webseite geöffnet werden.</p>
         </section>
       </section>
     </main>
@@ -542,9 +547,10 @@
     let maps = [];
     function createMap(elementId, latitude, longitude, label, zoom) {
       const map = L.map(elementId, { scrollWheelZoom: false }).setView([latitude, longitude], zoom);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende'
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 20,
+        subdomains: 'abcd',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
       }).addTo(map);
       L.marker([latitude, longitude]).addTo(map).bindPopup(label);
       return map;
@@ -590,9 +596,10 @@
           animation: false, baseLayer: false, baseLayerPicker: false, geocoder: false,
           navigationHelpButton: false, sceneModePicker: true, timeline: false, shadows: false
         });
-        cesiumViewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-          url: 'https://tile.openstreetmap.org/',
-          credit: new Cesium.Credit('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>', true)
+        cesiumViewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+          url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+          subdomains: ['a', 'b', 'c', 'd'],
+          credit: new Cesium.Credit('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>', true)
         }));
         cesiumViewer.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
           url: 'https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities',
