@@ -6,8 +6,6 @@
   <meta name="description" content="Persönliche Webseite von Jonas – Studium, Lebenslauf und Orte.">
   <title>About Me | Jonas</title>
 
-  <!-- Leaflet stellt die interaktiven Karten bereit. Internetverbindung erforderlich. -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/Widgets/widgets.css">
   <style>
     /* Farbvariablen für den hellen Modus */
@@ -173,7 +171,6 @@
     th, td { border: 1px solid var(--border); padding: 8px 9px; text-align: left; font-size: 14px; }
     th { background: var(--surface-soft); font-weight: 700; }
     tbody tr:hover { background: var(--row-hover); }
-    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .news-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .card {
       border: 1px solid var(--border);
@@ -183,7 +180,6 @@
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .map { height: 180px; width: 100%; background: var(--surface-soft); }
     .card-body { padding: 14px 16px 18px; }
     .card h3 { font-size: 15px; margin: 0 0 3px; }
     .card p { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
@@ -242,8 +238,6 @@
       outline-offset: 3px;
     }
     .contact-links svg { width: 22px; height: 22px; }
-    .leaflet-container { font-family: Arial, Helvetica, sans-serif; }
-    .leaflet-control-attribution { font-size: 8px !important; }
     /* Auf schmalen Bildschirmen stehen Foto und Karten untereinander. */
     @media (max-width: 720px) {
       body { padding: 0; }
@@ -251,9 +245,7 @@
       main { padding: 24px 18px; }
       .intro { grid-template-columns: 1fr; gap: 14px; }
       .profile-photo { max-width: 360px; }
-      .gallery { grid-template-columns: 1fr; }
       .news-grid { grid-template-columns: 1fr; }
-      .map { height: 210px; }
       .exercise-grid { grid-template-columns: 1fr; }
       .exercise-card--wide { grid-column: auto; }
       .map-frame { height: 390px; }
@@ -289,7 +281,6 @@
       <div class="tab-list" role="tablist" aria-label="Bereiche der Webseite">
         <button class="tab" id="tab-about" type="button" role="tab" aria-controls="panel-about" aria-selected="true" tabindex="0">About</button>
         <button class="tab" id="tab-news" type="button" role="tab" aria-controls="panel-news" aria-selected="false" tabindex="-1">News</button>
-        <button class="tab" id="tab-projects" type="button" role="tab" aria-controls="panel-projects" aria-selected="false" tabindex="-1">Projects</button>
         <button class="tab" id="tab-uebung3" type="button" role="tab" aria-controls="panel-uebung3" aria-selected="false" tabindex="-1">Übung 3</button>
       </div>
 
@@ -335,36 +326,6 @@
         <p class="section-lead">Aktuelles zu meiner Webseite und meinen Karten.</p>
         <div class="news-grid" id="news-list" aria-live="polite">
           <p class="news-status">Neuigkeiten werden geladen …</p>
-        </div>
-      </section>
-
-      <section class="tab-panel" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" tabindex="0" hidden>
-        <h2 id="work-title">Meine Projekte – Drei Web-Karten</h2>
-        <div class="gallery">
-          <article class="card">
-            <div class="map" id="map-mainz" role="region" aria-label="Interaktive Karte von Mainz"></div>
-            <div class="card-body">
-              <h3>Mainz</h3>
-              <p>Mein Studienort in Rheinland-Pfalz.</p>
-              <a href="https://www.openstreetmap.org/?mlat=50.001&mlon=8.272#map=12/50.001/8.272" target="_blank" rel="noopener noreferrer" aria-label="Mainz auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="map" id="map-sevilla" role="region" aria-label="Interaktive Karte von Sevilla"></div>
-            <div class="card-body">
-              <h3>Sevilla</h3>
-              <p>Hier habe ich mein FSJ gemacht.</p>
-              <a href="https://www.openstreetmap.org/?mlat=37.389&mlon=-5.984#map=12/37.389/-5.984" target="_blank" rel="noopener noreferrer" aria-label="Sevilla auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="map" id="map-bodensee" role="region" aria-label="Interaktive Karte vom Bodensee"></div>
-            <div class="card-body">
-              <h3>Bodensee</h3>
-              <p>Meine Heimatregion im Süden Deutschlands.</p>
-              <a href="https://www.openstreetmap.org/?mlat=47.66&mlon=9.18#map=10/47.66/9.18" target="_blank" rel="noopener noreferrer" aria-label="Bodensee auf OpenStreetMap in neuem Tab öffnen">Karte öffnen ↗</a>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -423,8 +384,6 @@
 
   <script>window.CESIUM_BASE_URL = 'https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/';</script>
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/Cesium.js"></script>
-  <!-- Kleine JavaScript-Ergänzung: Drei echte zoombare OpenStreetMap-Karten. -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
@@ -465,7 +424,6 @@
       });
       if (moveFocus) selectedTab.focus();
       if (selectedTab.id === 'tab-news') loadNews();
-      if (selectedTab.id === 'tab-projects') requestAnimationFrame(showMaps);
       if (selectedTab.id === 'tab-uebung3') requestAnimationFrame(showCesium);
     }
 
@@ -542,30 +500,6 @@
       } finally {
         newsLoading = false;
       }
-    }
-
-    let maps = [];
-    function createMap(elementId, latitude, longitude, label, zoom) {
-      const map = L.map(elementId, { scrollWheelZoom: false }).setView([latitude, longitude], zoom);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        maxZoom: 20,
-        subdomains: 'abcd',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>-Mitwirkende &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
-      }).addTo(map);
-      L.marker([latitude, longitude]).addTo(map).bindPopup(label);
-      return map;
-    }
-
-    function showMaps() {
-      if (!window.L) return;
-      if (maps.length === 0) {
-        maps = [
-          createMap('map-mainz', 50.001, 8.272, 'Mainz', 7),
-          createMap('map-sevilla', 37.389, -5.984, 'Sevilla', 7),
-          createMap('map-bodensee', 47.66, 9.18, 'Bodensee', 8)
-        ];
-      }
-      maps.forEach(map => map.invalidateSize());
     }
 
     let cesiumViewer;
