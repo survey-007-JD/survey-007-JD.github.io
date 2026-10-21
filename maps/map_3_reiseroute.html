@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_120250939903bd519566c6acb1a3e584 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_120250939903bd519566c6acb1a3e584" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_120250939903bd519566c6acb1a3e584 = L.map(
+                "map_120250939903bd519566c6acb1a3e584",
+                {
+                    center: [51.0, 6.8],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_463859df5c93cba152a7a6818e033154 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_463859df5c93cba152a7a6818e033154.addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            var tile_layer_b91e254ebd01a5247df04a1205fe3861 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap contributors, SRTM | OpenTopoMap",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            var poly_line_5d9cc02252bce44d367528c9b85e7c77 = L.polyline(
+                [[50.0, 8.2711], [52.52, 13.405], [52.0705, 4.3007], [48.8566, 2.3522]],
+                {"bubblingMouseEvents": true, "color": "#0004f9", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0004f9", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            poly_line_5d9cc02252bce44d367528c9b85e7c77.bindTooltip(
+                `<div>
+                     Reiseroute
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_28682a3be6f1ac57b75a8c96c4d76cbe = L.marker(
+                [50.0, 8.2711],
+                {
+}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            var div_icon_49f3ce644b1281830a24c18b7a0927d8 = L.divIcon({
+  "html": "\u003cdiv style=\u0027font-size: 14px; color: white; background: #0004f9; border: 2px solid white; border-radius: 50%; width: 28px; height: 28px; line-height: 24px; text-align: center;\u0027\u003e1\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_8a2557e213fb84d1ad5affc063639660 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f9e2062314ed555237f53df19a790c58 = $(`<div id="html_f9e2062314ed555237f53df19a790c58" style="width: 100.0%; height: 100.0%;"><b>1. Mainz</b><br>Station meiner Reiseroute.</div>`)[0];
+                popup_8a2557e213fb84d1ad5affc063639660.setContent(html_f9e2062314ed555237f53df19a790c58);
+            
+        
+
+        marker_28682a3be6f1ac57b75a8c96c4d76cbe.bindPopup(popup_8a2557e213fb84d1ad5affc063639660)
+        ;
+
+        
+    
+    
+            marker_28682a3be6f1ac57b75a8c96c4d76cbe.bindTooltip(
+                `<div>
+                     1. Mainz
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_28682a3be6f1ac57b75a8c96c4d76cbe.setIcon(div_icon_49f3ce644b1281830a24c18b7a0927d8);
+            
+    
+            var marker_f2dcbd296bf2fd275ef6d36d4a382f7b = L.marker(
+                [52.52, 13.405],
+                {
+}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            var div_icon_6f28598556e9dc23f2ff67a02398c6b0 = L.divIcon({
+  "html": "\u003cdiv style=\u0027font-size: 14px; color: white; background: #0004f9; border: 2px solid white; border-radius: 50%; width: 28px; height: 28px; line-height: 24px; text-align: center;\u0027\u003e2\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_8b80a24139c20278ccab3b5dc7de4002 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a0fd250ced9a5899c229307f7fcc609d = $(`<div id="html_a0fd250ced9a5899c229307f7fcc609d" style="width: 100.0%; height: 100.0%;"><b>2. Berlin</b><br>Station meiner Reiseroute.</div>`)[0];
+                popup_8b80a24139c20278ccab3b5dc7de4002.setContent(html_a0fd250ced9a5899c229307f7fcc609d);
+            
+        
+
+        marker_f2dcbd296bf2fd275ef6d36d4a382f7b.bindPopup(popup_8b80a24139c20278ccab3b5dc7de4002)
+        ;
+
+        
+    
+    
+            marker_f2dcbd296bf2fd275ef6d36d4a382f7b.bindTooltip(
+                `<div>
+                     2. Berlin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f2dcbd296bf2fd275ef6d36d4a382f7b.setIcon(div_icon_6f28598556e9dc23f2ff67a02398c6b0);
+            
+    
+            var marker_8e63e6b5972d3ac5a1f041bc0f2e192d = L.marker(
+                [52.0705, 4.3007],
+                {
+}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            var div_icon_6a9195b2a1e860d471e16a5b10dceec2 = L.divIcon({
+  "html": "\u003cdiv style=\u0027font-size: 14px; color: white; background: #0004f9; border: 2px solid white; border-radius: 50%; width: 28px; height: 28px; line-height: 24px; text-align: center;\u0027\u003e3\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_4cc821916e3f0beb11cf1663d6c416de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4ac98350687259a752b2a52a0168a527 = $(`<div id="html_4ac98350687259a752b2a52a0168a527" style="width: 100.0%; height: 100.0%;"><b>3. Den Haag</b><br>Station meiner Reiseroute.</div>`)[0];
+                popup_4cc821916e3f0beb11cf1663d6c416de.setContent(html_4ac98350687259a752b2a52a0168a527);
+            
+        
+
+        marker_8e63e6b5972d3ac5a1f041bc0f2e192d.bindPopup(popup_4cc821916e3f0beb11cf1663d6c416de)
+        ;
+
+        
+    
+    
+            marker_8e63e6b5972d3ac5a1f041bc0f2e192d.bindTooltip(
+                `<div>
+                     3. Den Haag
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8e63e6b5972d3ac5a1f041bc0f2e192d.setIcon(div_icon_6a9195b2a1e860d471e16a5b10dceec2);
+            
+    
+            var marker_d585cb489b7de7c178c4181949183bc9 = L.marker(
+                [48.8566, 2.3522],
+                {
+}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+        
+    
+            var div_icon_f804a9f9003be860bfeb69a6b4b24792 = L.divIcon({
+  "html": "\u003cdiv style=\u0027font-size: 14px; color: white; background: #0004f9; border: 2px solid white; border-radius: 50%; width: 28px; height: 28px; line-height: 24px; text-align: center;\u0027\u003e4\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_75afaafec9306bdbe9e2d8e71acefe3c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ebd1f2313df3e49bab9ba8b9470bfa30 = $(`<div id="html_ebd1f2313df3e49bab9ba8b9470bfa30" style="width: 100.0%; height: 100.0%;"><b>4. Paris</b><br>Station meiner Reiseroute.</div>`)[0];
+                popup_75afaafec9306bdbe9e2d8e71acefe3c.setContent(html_ebd1f2313df3e49bab9ba8b9470bfa30);
+            
+        
+
+        marker_d585cb489b7de7c178c4181949183bc9.bindPopup(popup_75afaafec9306bdbe9e2d8e71acefe3c)
+        ;
+
+        
+    
+    
+            marker_d585cb489b7de7c178c4181949183bc9.bindTooltip(
+                `<div>
+                     4. Paris
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d585cb489b7de7c178c4181949183bc9.setIcon(div_icon_f804a9f9003be860bfeb69a6b4b24792);
+            
+    
+            map_120250939903bd519566c6acb1a3e584.fitBounds(
+                [[50.0, 8.2711], [52.52, 13.405], [52.0705, 4.3007], [48.8566, 2.3522]],
+                {"padding": [20, 20]}
+            );
+        
+    
+            var layer_control_e9f8aa4d8f45ef48456f14895164c3ce_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_463859df5c93cba152a7a6818e033154,
+                    "OSM-France" : tile_layer_b91e254ebd01a5247df04a1205fe3861,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_e9f8aa4d8f45ef48456f14895164c3ce = L.control.layers(
+                layer_control_e9f8aa4d8f45ef48456f14895164c3ce_layers.base_layers,
+                layer_control_e9f8aa4d8f45ef48456f14895164c3ce_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_120250939903bd519566c6acb1a3e584);
+
+        
+</script>
+</html>

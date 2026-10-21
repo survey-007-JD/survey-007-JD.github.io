@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a5a023e2f2b84363817078c3f1835655 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_a5a023e2f2b84363817078c3f1835655" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a5a023e2f2b84363817078c3f1835655 = L.map(
+                "map_a5a023e2f2b84363817078c3f1835655",
+                {
+                    center: [56.5, -4.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_1a934978d3409fe51f64c7429b7ae6f7 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1a934978d3409fe51f64c7429b7ae6f7.addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var poly_line_998a9564aaddb5c3503a5846c943025f = L.polyline(
+                [[55.8642, -4.2518], [57.2736, -6.2155], [57.3229, -4.4244], [56.3398, -2.7967], [55.9533, -3.1883], [56.1165, -3.9369]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            poly_line_998a9564aaddb5c3503a5846c943025f.bindTooltip(
+                `<div>
+                     Reiseroute
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_653d5b495b014c97478e851b4b69b2e3 = L.marker(
+                [55.8642, -4.2518],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_30aef4abc05e50fbb5bb3dacee758c37 = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e1\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_653d5b495b014c97478e851b4b69b2e3.setIcon(div_icon_30aef4abc05e50fbb5bb3dacee758c37);
+            
+    
+            var marker_15901854645a9f97fa9bb5e6f9906832 = L.marker(
+                [55.8642, -4.2518],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_a230c209df2ea3941cf2d6916ddf8ac7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fd5a03491d9af226f0b94564c94c8f0c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a337e157941bd73679d6d6839f4a054f = $(`<div id="html_a337e157941bd73679d6d6839f4a054f" style="width: 100.0%; height: 100.0%;"><b>1. Glasgow</b></div>`)[0];
+                popup_fd5a03491d9af226f0b94564c94c8f0c.setContent(html_a337e157941bd73679d6d6839f4a054f);
+            
+        
+
+        marker_15901854645a9f97fa9bb5e6f9906832.bindPopup(popup_fd5a03491d9af226f0b94564c94c8f0c)
+        ;
+
+        
+    
+    
+            marker_15901854645a9f97fa9bb5e6f9906832.bindTooltip(
+                `<div>
+                     1. Glasgow
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_15901854645a9f97fa9bb5e6f9906832.setIcon(icon_a230c209df2ea3941cf2d6916ddf8ac7);
+            
+    
+            var marker_be1298aa31d2596b5550d649f21b06cd = L.marker(
+                [57.2736, -6.2155],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_fbf172c2eeb765af41c29bab6d3b1b4e = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e2\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_be1298aa31d2596b5550d649f21b06cd.setIcon(div_icon_fbf172c2eeb765af41c29bab6d3b1b4e);
+            
+    
+            var marker_4620a4042601d7bf9538774dd8ec477e = L.marker(
+                [57.2736, -6.2155],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_a477afff0582c603afc92fc8c4c54b6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_60ed71c4f666ac30a55c5f3e01d233f6 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_4c5db89789581a282f20efb109b1c7aa = $(`<div id="html_4c5db89789581a282f20efb109b1c7aa" style="width: 100.0%; height: 100.0%;"><b>2. Isle of Skye</b></div>`)[0];
+                popup_60ed71c4f666ac30a55c5f3e01d233f6.setContent(html_4c5db89789581a282f20efb109b1c7aa);
+            
+        
+
+        marker_4620a4042601d7bf9538774dd8ec477e.bindPopup(popup_60ed71c4f666ac30a55c5f3e01d233f6)
+        ;
+
+        
+    
+    
+            marker_4620a4042601d7bf9538774dd8ec477e.bindTooltip(
+                `<div>
+                     2. Isle of Skye
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4620a4042601d7bf9538774dd8ec477e.setIcon(icon_a477afff0582c603afc92fc8c4c54b6c);
+            
+    
+            var marker_ec08afda986bc912ac06f5f0f00d26b9 = L.marker(
+                [57.3229, -4.4244],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_9aa32e408c4b17cf8bf6c981b74b7a38 = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e3\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_ec08afda986bc912ac06f5f0f00d26b9.setIcon(div_icon_9aa32e408c4b17cf8bf6c981b74b7a38);
+            
+    
+            var marker_01e7c2754bc589f26178d871ee71425e = L.marker(
+                [57.3229, -4.4244],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_211422d52f7abbcbb912a3cabdcbfc13 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_21874b85e4876581030f8563ba540bfb = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_cf86d60269e09c89dbc57e510f2eb43c = $(`<div id="html_cf86d60269e09c89dbc57e510f2eb43c" style="width: 100.0%; height: 100.0%;"><b>3. Loch Ness</b></div>`)[0];
+                popup_21874b85e4876581030f8563ba540bfb.setContent(html_cf86d60269e09c89dbc57e510f2eb43c);
+            
+        
+
+        marker_01e7c2754bc589f26178d871ee71425e.bindPopup(popup_21874b85e4876581030f8563ba540bfb)
+        ;
+
+        
+    
+    
+            marker_01e7c2754bc589f26178d871ee71425e.bindTooltip(
+                `<div>
+                     3. Loch Ness
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_01e7c2754bc589f26178d871ee71425e.setIcon(icon_211422d52f7abbcbb912a3cabdcbfc13);
+            
+    
+            var marker_55c8fdbd5eef76080ed26dcb9ff95149 = L.marker(
+                [56.3398, -2.7967],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_57907682640acf34e4d1cd0c22a214cd = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e4\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_55c8fdbd5eef76080ed26dcb9ff95149.setIcon(div_icon_57907682640acf34e4d1cd0c22a214cd);
+            
+    
+            var marker_da50b1effd9a82631d8a2ba1fd2eea95 = L.marker(
+                [56.3398, -2.7967],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_1e24f8b6b46a9a05a3aa17e94c30be41 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_39f612e2f68d731d32b5b9ecc31a430d = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5fce75157c96acb89ca63c745b5929ff = $(`<div id="html_5fce75157c96acb89ca63c745b5929ff" style="width: 100.0%; height: 100.0%;"><b>4. St Andrews</b></div>`)[0];
+                popup_39f612e2f68d731d32b5b9ecc31a430d.setContent(html_5fce75157c96acb89ca63c745b5929ff);
+            
+        
+
+        marker_da50b1effd9a82631d8a2ba1fd2eea95.bindPopup(popup_39f612e2f68d731d32b5b9ecc31a430d)
+        ;
+
+        
+    
+    
+            marker_da50b1effd9a82631d8a2ba1fd2eea95.bindTooltip(
+                `<div>
+                     4. St Andrews
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da50b1effd9a82631d8a2ba1fd2eea95.setIcon(icon_1e24f8b6b46a9a05a3aa17e94c30be41);
+            
+    
+            var marker_cf11e18eb97f3836aaee55f55b4cd5f9 = L.marker(
+                [55.9533, -3.1883],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_deed2fd9c72dc94a31cfd3f7c4981f40 = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e5\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_cf11e18eb97f3836aaee55f55b4cd5f9.setIcon(div_icon_deed2fd9c72dc94a31cfd3f7c4981f40);
+            
+    
+            var marker_96121705b877416dd82fd62fb68bda77 = L.marker(
+                [55.9533, -3.1883],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_3e1ba65fd9d1d22a3a67f156cca6c3f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_24d3b24424a6af51e124199c615a09e0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d35d66c138c336c365fa41ca614d2136 = $(`<div id="html_d35d66c138c336c365fa41ca614d2136" style="width: 100.0%; height: 100.0%;"><b>5. Edinburgh</b></div>`)[0];
+                popup_24d3b24424a6af51e124199c615a09e0.setContent(html_d35d66c138c336c365fa41ca614d2136);
+            
+        
+
+        marker_96121705b877416dd82fd62fb68bda77.bindPopup(popup_24d3b24424a6af51e124199c615a09e0)
+        ;
+
+        
+    
+    
+            marker_96121705b877416dd82fd62fb68bda77.bindTooltip(
+                `<div>
+                     5. Edinburgh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_96121705b877416dd82fd62fb68bda77.setIcon(icon_3e1ba65fd9d1d22a3a67f156cca6c3f3);
+            
+    
+            var marker_6c244d5740b9d682467652fcfbb95630 = L.marker(
+                [56.1165, -3.9369],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var div_icon_15989a0157a36e92d270466e9474ffdf = L.divIcon({
+  "html": "\n            \u003cdiv style=\"background:#111827;color:#fff;width:22px;height:22px;border-radius:50%;\n                       display:flex;align-items:center;justify-content:center;font-size:12px;\n                       border:2px solid #38bdf8;box-shadow:0 0 6px rgba(0,0,0,.3);\"\u003e6\u003c/div\u003e\n            ",
+  "iconSize": [22, 22],
+  "iconAnchor": [11, 11],
+  "className": "empty",
+});
+        
+    
+                marker_6c244d5740b9d682467652fcfbb95630.setIcon(div_icon_15989a0157a36e92d270466e9474ffdf);
+            
+    
+            var marker_cbc016b3ac5ebbeedba2410e0d025f9c = L.marker(
+                [56.1165, -3.9369],
+                {
+}
+            ).addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+            var icon_8c2f6b7f0e7bccefbdd95d7fc8785c70 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3698fc289abe4208cc52cb374ebe395 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_94f2d5110485da8d0c84c3711dc28a41 = $(`<div id="html_94f2d5110485da8d0c84c3711dc28a41" style="width: 100.0%; height: 100.0%;"><b>6. Stirling</b></div>`)[0];
+                popup_e3698fc289abe4208cc52cb374ebe395.setContent(html_94f2d5110485da8d0c84c3711dc28a41);
+            
+        
+
+        marker_cbc016b3ac5ebbeedba2410e0d025f9c.bindPopup(popup_e3698fc289abe4208cc52cb374ebe395)
+        ;
+
+        
+    
+    
+            marker_cbc016b3ac5ebbeedba2410e0d025f9c.bindTooltip(
+                `<div>
+                     6. Stirling
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cbc016b3ac5ebbeedba2410e0d025f9c.setIcon(icon_8c2f6b7f0e7bccefbdd95d7fc8785c70);
+            
+    
+            tile_layer_1a934978d3409fe51f64c7429b7ae6f7.addTo(map_a5a023e2f2b84363817078c3f1835655);
+        
+    
+                marker_653d5b495b014c97478e851b4b69b2e3.setIcon(div_icon_30aef4abc05e50fbb5bb3dacee758c37);
+            
+    
+                marker_15901854645a9f97fa9bb5e6f9906832.setIcon(icon_a230c209df2ea3941cf2d6916ddf8ac7);
+            
+    
+                marker_be1298aa31d2596b5550d649f21b06cd.setIcon(div_icon_fbf172c2eeb765af41c29bab6d3b1b4e);
+            
+    
+                marker_4620a4042601d7bf9538774dd8ec477e.setIcon(icon_a477afff0582c603afc92fc8c4c54b6c);
+            
+    
+                marker_ec08afda986bc912ac06f5f0f00d26b9.setIcon(div_icon_9aa32e408c4b17cf8bf6c981b74b7a38);
+            
+    
+                marker_01e7c2754bc589f26178d871ee71425e.setIcon(icon_211422d52f7abbcbb912a3cabdcbfc13);
+            
+    
+                marker_55c8fdbd5eef76080ed26dcb9ff95149.setIcon(div_icon_57907682640acf34e4d1cd0c22a214cd);
+            
+    
+                marker_da50b1effd9a82631d8a2ba1fd2eea95.setIcon(icon_1e24f8b6b46a9a05a3aa17e94c30be41);
+            
+    
+                marker_cf11e18eb97f3836aaee55f55b4cd5f9.setIcon(div_icon_deed2fd9c72dc94a31cfd3f7c4981f40);
+            
+    
+                marker_96121705b877416dd82fd62fb68bda77.setIcon(icon_3e1ba65fd9d1d22a3a67f156cca6c3f3);
+            
+    
+                marker_6c244d5740b9d682467652fcfbb95630.setIcon(div_icon_15989a0157a36e92d270466e9474ffdf);
+            
+    
+                marker_cbc016b3ac5ebbeedba2410e0d025f9c.setIcon(icon_8c2f6b7f0e7bccefbdd95d7fc8785c70);
+            
+</script>
+</html>

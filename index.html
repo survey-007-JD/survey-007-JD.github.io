@@ -8,6 +8,7 @@
 
   <!-- Leaflet stellt die interaktiven Karten bereit. Internetverbindung erforderlich. -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/Widgets/widgets.css">
   <style>
     /* Farbvariablen für den hellen Modus */
     :root {
@@ -192,6 +193,21 @@
     .news-card h3 { font-size: 17px; margin-bottom: 8px; }
     .news-card p { font-size: 14px; line-height: 1.55; }
     .news-status { grid-column: 1 / -1; color: var(--muted); }
+    .exercise-section { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .exercise-section h3 { margin: 0 0 8px; font-size: 18px; }
+    .exercise-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .exercise-card { overflow: hidden; border: 1px solid var(--border); border-radius: 16px; background: var(--surface-soft); }
+    .exercise-card--wide { grid-column: 1 / -1; }
+    .exercise-card header { padding: 14px 16px 10px; }
+    .exercise-card h4 { margin: 0 0 4px; font-size: 16px; }
+    .exercise-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .map-frame { display: block; width: 100%; height: 380px; border: 0; border-top: 1px solid var(--border); background: var(--surface); }
+    .frame-link { display: block; padding: 10px 16px 14px; font-size: 13px; font-weight: 700; }
+    .cesium-shell { overflow: hidden; border: 1px solid var(--border); border-radius: 16px; background: #dce7ef; }
+    #cesiumContainer { width: 100%; height: min(68vh, 600px); min-height: 420px; }
+    .cesium-status { margin-top: 10px; color: var(--muted); font-size: 13px; }
+    .cesium-status.is-error { color: #a31919; }
+    .exercise-note { margin-top: 14px; padding: 13px 15px; border-left: 4px solid var(--yellow); border-radius: 0 10px 10px 0; background: var(--surface-soft); color: var(--muted); font-size: 14px; }
     footer {
       display: flex;
       align-items: center;
@@ -237,6 +253,10 @@
       .gallery { grid-template-columns: 1fr; }
       .news-grid { grid-template-columns: 1fr; }
       .map { height: 210px; }
+      .exercise-grid { grid-template-columns: 1fr; }
+      .exercise-card--wide { grid-column: auto; }
+      .map-frame { height: 390px; }
+      #cesiumContainer { min-height: 390px; }
     }
     @media (max-width: 430px) {
       .site-header { padding: 24px 18px; }
@@ -268,6 +288,7 @@
         <button class="tab" id="tab-about" type="button" role="tab" aria-controls="panel-about" aria-selected="true" tabindex="0">About</button>
         <button class="tab" id="tab-news" type="button" role="tab" aria-controls="panel-news" aria-selected="false" tabindex="-1">News</button>
         <button class="tab" id="tab-projects" type="button" role="tab" aria-controls="panel-projects" aria-selected="false" tabindex="-1">Projects</button>
+        <button class="tab" id="tab-uebung3" type="button" role="tab" aria-controls="panel-uebung3" aria-selected="false" tabindex="-1">Übung 3</button>
       </div>
 
       <section class="tab-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0">
@@ -344,6 +365,36 @@
           </article>
         </div>
       </section>
+
+      <section class="tab-panel" id="panel-uebung3" role="tabpanel" aria-labelledby="tab-uebung3" tabindex="0" hidden>
+        <h2>Übung 3 – Webkarten mit APIs und SDKs</h2>
+        <p class="section-lead">Meine Folium-Karten, die deutschlandweiten 3D-Gebäude von basemap.de und eine zusätzliche Visualisierung.</p>
+
+        <section class="exercise-section" aria-labelledby="folium-title">
+          <h3 id="folium-title">Folium-Karten</h3>
+          <p class="section-lead">Die Karten liegen direkt in diesem Repository und werden als eigenständige HTML-Dateien eingebettet.</p>
+          <div class="exercise-grid">
+            <article class="exercise-card"><header><h4>1. Basiskarte</h4><p>Grundkarte als Einstieg.</p></header><iframe class="map-frame" src="maps/map_1_basiskarte.html" title="Folium-Karte: Basiskarte" loading="lazy"></iframe><a class="frame-link" href="maps/map_1_basiskarte.html" target="_blank" rel="noopener noreferrer">Karte in neuem Tab öffnen ↗</a></article>
+            <article class="exercise-card"><header><h4>2. Persönliche Punkte</h4><p>Mainz, Pfullendorf und Ramsen (Pfalz).</p></header><iframe class="map-frame" src="maps/map_2_punkte.html" title="Folium-Karte: Persönliche Punkte" loading="lazy"></iframe><a class="frame-link" href="maps/map_2_punkte.html" target="_blank" rel="noopener noreferrer">Karte in neuem Tab öffnen ↗</a></article>
+            <article class="exercise-card"><header><h4>3. Reiseroute</h4><p>Mainz → Berlin → Den Haag → Paris.</p></header><iframe class="map-frame" src="maps/map_3_reiseroute.html" title="Folium-Karte: Reiseroute" loading="lazy"></iframe><a class="frame-link" href="maps/map_3_reiseroute.html" target="_blank" rel="noopener noreferrer">Karte in neuem Tab öffnen ↗</a></article>
+            <article class="exercise-card"><header><h4>4. Flächen</h4><p>Besuchte Länder als GeoJSON-Flächen.</p></header><iframe class="map-frame" src="maps/map_4_flaechen_online.html" title="Folium-Karte: Besuchte Länder" loading="lazy"></iframe><a class="frame-link" href="maps/map_4_flaechen_online.html" target="_blank" rel="noopener noreferrer">Karte in neuem Tab öffnen ↗</a></article>
+            <article class="exercise-card exercise-card--wide"><header><h4>5. 3D-Stadt</h4><p>Die fünfte Folium-Karte aus dem Übungsnotebook.</p></header><iframe class="map-frame" src="maps/map_5_3d.html" title="Folium-Karte: 3D-Stadt" loading="lazy"></iframe><a class="frame-link" href="maps/map_5_3d.html" target="_blank" rel="noopener noreferrer">Karte in neuem Tab öffnen ↗</a></article>
+          </div>
+        </section>
+
+        <section class="exercise-section" aria-labelledby="cesium-title">
+          <h3 id="cesium-title">Deutschlandweite 3D-Gebäude mit Cesium</h3>
+          <p class="section-lead">Die Szene startet beim Öffnen dieses Tabs und zeigt die LoD2-Gebäude von basemap.de.</p>
+          <div class="cesium-shell"><div id="cesiumContainer" role="region" aria-label="Interaktive 3D-Karte mit LoD2-Gebäuden in Deutschland"></div></div>
+          <p class="cesium-status" id="cesium-status" role="status">Die 3D-Karte wird beim Öffnen dieses Tabs geladen.</p>
+          <p class="exercise-note">Datenquelle: <a href="https://basemap.de/produkte-und-dienste/3d/" target="_blank" rel="noopener noreferrer">basemap.de 3D</a>. Die Ansicht startet über Mainz; mit Maus oder Touch lassen sich Ort, Zoom und Perspektive verändern.</p>
+        </section>
+
+        <section class="exercise-section" aria-labelledby="advanced-title">
+          <h3 id="advanced-title">Erweiterte Visualisierung</h3>
+          <p class="exercise-note">Für den letzten Teil kannst du eine Karte in <a href="https://kepler.gl/" target="_blank" rel="noopener noreferrer">Kepler.gl</a> erstellen, als HTML exportieren und als <code>assets/kepler_map.html</code> speichern. Danach binde ich sie hier ein.</p>
+        </section>
+      </section>
     </main>
     <footer>
       <span>Jonas D. GuV © 2026.</span>
@@ -365,6 +416,8 @@
     </footer>
   </div>
 
+  <script>window.CESIUM_BASE_URL = 'https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/';</script>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.137/Build/Cesium/Cesium.js"></script>
   <!-- Kleine JavaScript-Ergänzung: Drei echte zoombare OpenStreetMap-Karten. -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
@@ -408,6 +461,7 @@
       if (moveFocus) selectedTab.focus();
       if (selectedTab.id === 'tab-news') loadNews();
       if (selectedTab.id === 'tab-projects') requestAnimationFrame(showMaps);
+      if (selectedTab.id === 'tab-uebung3') requestAnimationFrame(showCesium);
     }
 
     tabs.forEach((tab, index) => {
@@ -506,6 +560,73 @@
         ];
       }
       maps.forEach(map => map.invalidateSize());
+    }
+
+    let cesiumViewer;
+    let cesiumLoading = false;
+
+    function setCesiumStatus(message, isError = false) {
+      const status = document.getElementById('cesium-status');
+      status.textContent = message;
+      status.classList.toggle('is-error', isError);
+    }
+
+    async function showCesium() {
+      if (!window.Cesium) {
+        setCesiumStatus('Cesium konnte nicht geladen werden. Bitte lade die Seite erneut.', true);
+        return;
+      }
+      if (cesiumViewer) {
+        cesiumViewer.resize();
+        cesiumViewer.scene.requestRender();
+        return;
+      }
+      if (cesiumLoading) return;
+      cesiumLoading = true;
+      setCesiumStatus('3D-Karte und Gebäudedaten werden geladen …');
+      try {
+        const Cesium = window.Cesium;
+        cesiumViewer = new Cesium.Viewer('cesiumContainer', {
+          animation: false, baseLayer: false, baseLayerPicker: false, geocoder: false,
+          navigationHelpButton: false, sceneModePicker: true, timeline: false, shadows: false
+        });
+        cesiumViewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+          url: 'https://tile.openstreetmap.org/',
+          credit: new Cesium.Credit('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>', true)
+        }));
+        cesiumViewer.imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+          url: 'https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities',
+          layers: 'de_basemapde_web_raster_farbe',
+          parameters: { transparent: true, format: 'image/png' }
+        }));
+        cesiumViewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(8.272, 50.001, 1500),
+          orientation: { heading: 0, pitch: Cesium.Math.toRadians(-50), roll: 0 }
+        });
+        const tileset = await Cesium.Cesium3DTileset.fromUrl(
+          'https://sgx.geodatenzentrum.de/gdz_basemapde_3d_gebaeude/lod2_4326_null.json',
+          { maximumScreenSpaceError: 16, showOutline: false }
+        );
+        tileset.style = new Cesium.Cesium3DTileStyle({
+          color: { conditions: [
+            ["${surface} === 'wall'", "color('#f2f2f2')"],
+            ["${surface} === 'roof'", "color('#ff5c4d')"],
+            ["${surface} === 'bridge'", "color('#999999')"]
+          ] }
+        });
+        cesiumViewer.scene.primitives.add(tileset);
+        cesiumViewer.resize();
+        setCesiumStatus('3D-Gebäude geladen. Die Gebäude werden je nach Zoomstufe nachgeladen.');
+      } catch (error) {
+        console.error('Cesium konnte nicht initialisiert werden:', error);
+        if (cesiumViewer) {
+          cesiumViewer.destroy();
+          cesiumViewer = undefined;
+        }
+        setCesiumStatus('Die 3D-Daten konnten nicht geladen werden. Bitte versuche es später erneut.', true);
+      } finally {
+        cesiumLoading = false;
+      }
     }
   </script>
 </body>

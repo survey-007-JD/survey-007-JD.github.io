@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3c8126488fe9ccd50a4f7efde114b9b9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_3c8126488fe9ccd50a4f7efde114b9b9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3c8126488fe9ccd50a4f7efde114b9b9 = L.map(
+                "map_3c8126488fe9ccd50a4f7efde114b9b9",
+                {
+                    center: [49.2, 8.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8034012cf5ae15b50a42c8c22fa80259 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8034012cf5ae15b50a42c8c22fa80259.addTo(map_3c8126488fe9ccd50a4f7efde114b9b9);
+        
+    
+            var tile_layer_470349bd532558f0a9b145d27254dfb9 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap contributors, SRTM | OpenTopoMap",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            var marker_bc33f292316a0d038f34bc80fe145138 = L.marker(
+                [50.0, 8.2711],
+                {
+}
+            ).addTo(map_3c8126488fe9ccd50a4f7efde114b9b9);
+        
+    
+            var icon_9c4598a28590dc7cec702d1f257a6ba4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "book",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_407c1ee10033a1a7a28165427a72fe9d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ba3531a2b426769823dbef704a01c538 = $(`<div id="html_ba3531a2b426769823dbef704a01c538" style="width: 100.0%; height: 100.0%;"><b>Mainz</b><br>Mein Studienort.</div>`)[0];
+                popup_407c1ee10033a1a7a28165427a72fe9d.setContent(html_ba3531a2b426769823dbef704a01c538);
+            
+        
+
+        marker_bc33f292316a0d038f34bc80fe145138.bindPopup(popup_407c1ee10033a1a7a28165427a72fe9d)
+        ;
+
+        
+    
+    
+            marker_bc33f292316a0d038f34bc80fe145138.bindTooltip(
+                `<div>
+                     Mainz
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bc33f292316a0d038f34bc80fe145138.setIcon(icon_9c4598a28590dc7cec702d1f257a6ba4);
+            
+    
+            var marker_474398db2f86697871f5521453f8bbdb = L.marker(
+                [47.924349, 9.255982],
+                {
+}
+            ).addTo(map_3c8126488fe9ccd50a4f7efde114b9b9);
+        
+    
+            var icon_5402f8173b1697e61ea7190778159f91 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f1cf47a389bc32128b3c0bfac16b78e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cf9ae852cdd68c6c22920bfb2a12f0d0 = $(`<div id="html_cf9ae852cdd68c6c22920bfb2a12f0d0" style="width: 100.0%; height: 100.0%;"><b>Pfullendorf</b><br>Meine Heimatstadt in Oberschwaben.</div>`)[0];
+                popup_9f1cf47a389bc32128b3c0bfac16b78e.setContent(html_cf9ae852cdd68c6c22920bfb2a12f0d0);
+            
+        
+
+        marker_474398db2f86697871f5521453f8bbdb.bindPopup(popup_9f1cf47a389bc32128b3c0bfac16b78e)
+        ;
+
+        
+    
+    
+            marker_474398db2f86697871f5521453f8bbdb.bindTooltip(
+                `<div>
+                     Pfullendorf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_474398db2f86697871f5521453f8bbdb.setIcon(icon_5402f8173b1697e61ea7190778159f91);
+            
+    
+            var marker_06322c031e60f5f4ab8a456e43d85dfc = L.marker(
+                [49.536667, 8.013056],
+                {
+}
+            ).addTo(map_3c8126488fe9ccd50a4f7efde114b9b9);
+        
+    
+            var icon_015395f7fe5605685f1eaf25e98cf44f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "flag",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_40706b5a7bff9c6da7502233f7a7c1da = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dfe6bb3f9a95b18a1745b8534224087f = $(`<div id="html_dfe6bb3f9a95b18a1745b8534224087f" style="width: 100.0%; height: 100.0%;"><b>Ramsen (Pfalz)</b><br>Ein Ort in der Pfalz, den ich gut kenne.</div>`)[0];
+                popup_40706b5a7bff9c6da7502233f7a7c1da.setContent(html_dfe6bb3f9a95b18a1745b8534224087f);
+            
+        
+
+        marker_06322c031e60f5f4ab8a456e43d85dfc.bindPopup(popup_40706b5a7bff9c6da7502233f7a7c1da)
+        ;
+
+        
+    
+    
+            marker_06322c031e60f5f4ab8a456e43d85dfc.bindTooltip(
+                `<div>
+                     Ramsen (Pfalz)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_06322c031e60f5f4ab8a456e43d85dfc.setIcon(icon_015395f7fe5605685f1eaf25e98cf44f);
+            
+    
+            map_3c8126488fe9ccd50a4f7efde114b9b9.fitBounds(
+                [[50.0, 8.2711], [47.924349, 9.255982], [49.536667, 8.013056]],
+                {"padding": [20, 20]}
+            );
+        
+    
+            var layer_control_211038bf33b68e985249905501e43bd1_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_8034012cf5ae15b50a42c8c22fa80259,
+                    "OSM-France" : tile_layer_470349bd532558f0a9b145d27254dfb9,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_211038bf33b68e985249905501e43bd1 = L.control.layers(
+                layer_control_211038bf33b68e985249905501e43bd1_layers.base_layers,
+                layer_control_211038bf33b68e985249905501e43bd1_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_3c8126488fe9ccd50a4f7efde114b9b9);
+
+        
+</script>
+</html>
