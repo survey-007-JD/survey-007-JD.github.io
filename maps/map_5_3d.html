@@ -29,14 +29,17 @@
      maximumRenderTimeChange: Infinity
     });
 
-    // Hintergrundkarte für die Gebiete außerhalb von Deutschland
-    var osm= new Cesium.UrlTemplateImageryProvider({
-      url : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-      subdomains: ['a', 'b', 'c', 'd'],
-      credit: new Cesium.Credit("\u003ca href=\"https://www.openstreetmap.org/copyright\""+
-                   "target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e \u0026copy; CARTO", true)
-   });
-   viewer.imageryLayers.addImageryProvider(osm);
+    // OpenStreetMap-Hintergrundkarte ohne API-Key
+var osm = new Cesium.UrlTemplateImageryProvider({
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    maximumLevel: 19,
+    credit: new Cesium.Credit(
+        '&copy; OpenStreetMap contributors',
+        true
+    )
+});
+
+viewer.imageryLayers.addImageryProvider(osm);
 
   // Kamera auf Hochschule Mainz (präziser Punkt) zentrieren
   viewer.camera.flyTo({
