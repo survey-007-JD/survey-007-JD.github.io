@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Übung 5 – Web-GIS Mainz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    #map { height: 75vh; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Geoinformatik 2 – Übung 5</h1>
+  <p>Interaktive Web-GIS-Karte für Mainz mit OpenStreetMap-Daten</p>
+  <div id="map"></div>
+  <p id="status">Geodaten werden geladen ...</p>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([50.0, 8.27], 12);
+
+    const osm = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }
+    ).addTo(map);
+
+    const control = L.control.layers(
+      { 'OpenStreetMap': osm }, {}
+    ).addTo(map);
+
+    const datasets = [
+      { file: 'cafes.geojson', name: 'Cafés', color: 'orange' },
+      { file: 'doener.geojson', name: 'Dönerläden', color: 'red' },
+      { file: 'irish_pubs.geojson', name: 'Irish Pubs', color: 'green' },
+      { file: 'gyms.geojson', name: 'Fitnessstudios', color: 'blue' },
+      { file: 'points.geojson', name: 'Beispielpunkte', color: 'purple' }
+    ];
+
+    async function loadData() {
+      let loaded = 0;
+
+      for (const item of datasets) {
+        try {
+          const response = await fetch(item.file);
+          if (!response.ok) continue;
+
+          const data = await response.json();
+
+          const layer = L.geoJSON(data, {
+            pointToLayer: (feature, latlng) =>
+              L.circleMarker(latlng, {
+                radius: 7,
+                color: item.color,
+                fillColor: item.color,
+                fillOpacity: 0.8
+              }),
+            onEachFeature: (feature, marker) => {
+              const popup = document.createElement('div');
+              const heading = document.createElement('strong');
+              heading.textContent = feature.properties?.name || item.name;
+              popup.appendChild(heading);
+
+              for (const [key, value] of Object.entries(feature.properties || {})) {
+                const row = document.createElement('div');
+                row.textContent = `${key}: ${value}`;
+                popup.appendChild(row);
+              }
+              marker.bindPopup(popup);
+            }
+          });
+
+          control.addOverlay(layer, item.name);
+          layer.addTo(map);
+          loaded++;
+        } catch (error) {
+          console.warn(item.file, error);
+        }
+      }
+
+      document.getElementById('status').textContent =
+        loaded + ' GeoJSON-Layer geladen.';
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
